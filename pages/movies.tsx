@@ -38,6 +38,9 @@ export const getServerSideProps = async () => {
       props: { movies: JSON.parse(JSON.stringify(movies)) },
     };
   } catch (e) {
-    return { movies: null };
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    }
+    return new Error("Something went wrong");
   }
 };

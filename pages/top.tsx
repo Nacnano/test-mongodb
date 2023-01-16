@@ -37,5 +37,10 @@ export async function getStaticProps() {
     return {
       props: { movies: JSON.parse(JSON.stringify(movies)) },
     };
-  } catch (e) {}
+  } catch (e) {
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    }
+    return new Error("Something went wrong");
+  }
 }
